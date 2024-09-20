@@ -2,7 +2,7 @@ from django.utils import timezone
 from django.db import models
 from django.dispatch import receiver
 from django.forms import ValidationError
-
+from django.db.models.signals import pre_save
 
 class Owner(models.Model):
     id = models.AutoField(primary_key=True)
@@ -93,9 +93,13 @@ class Pet(models.Model):
         dias_adopcion = timezone.now() - self.adoption_date
         return dias_adopcion.days
     
+  
     def __str__(self) -> str:
         return self.name 
-
+    
     # Signal para asignar la fecha de adopción automáticamente
-  
+    @receiver(pre_save,sender='pets.Pet')
+    def fecha_adopcion_auto(sender,instance,**kwargs):
+        if not instance.adoption_date:
+            instance.adoption_date = timezone.now()
     

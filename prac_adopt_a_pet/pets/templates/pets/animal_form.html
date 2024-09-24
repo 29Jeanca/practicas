@@ -1,0 +1,19 @@
+<!-- animal_form.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Animal</title>
+</head>
+<body>
+    <h1>Agregar un Nuevo Animal</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }} <!-- Esto renderiza el formulario como párrafos -->
+        <button type="submit">Guardar</button>
+    </form>
+
+    <a href="{% url 'list_animals' %}">Volver a la lista de animales</a>
+</body>
+</html>

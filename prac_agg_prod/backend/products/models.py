@@ -8,7 +8,10 @@ class Product(models.Model):
     description = models.TextField()
     image = models.CharField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
+    id_user = models.ForeignKey("users.Register", on_delete=models.CASCADE,blank=True, null=True,related_name='products')
 
     def __str__(self):
         return self.name
+    
+
     
